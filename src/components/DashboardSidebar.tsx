@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
   ];
 
   return (
-    <div className="bg-white p-4 h-full min-h-screen">
+    <div className="bg-white p-4 h-full min-h-screen w-52 border-r">
       <nav>
         <ul>
           <li className="text-3xl font-bold mb-12">

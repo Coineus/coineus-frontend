@@ -7,7 +7,7 @@ type TableProps = {
 
 const Table = ({ heads, rows }: TableProps) => {
   return (
-    <div className="bg-white rounded-3xl px-4 pt-1 pb-2">
+    <div className="bg-white rounded-3xl px-4 pt-1 pb-2 border">
       <table className="w-full">
         <tr className="text-left">
           {heads.map((head) => (

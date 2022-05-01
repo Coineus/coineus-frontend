@@ -6,20 +6,23 @@ type loginProps = {
   email: string;
   password: string;
 };
-export const authLoginService = ({ email, password }: loginProps) => {
+export const authLoginService = async ({ email, password }: loginProps) => {
   const bodyFormData = formMaker({ email, password });
-  axios({
-    method: 'post',
-    url: API_URL.LOGIN,
-    data: bodyFormData,
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
+
+  try {
+    const res = await axios({
+      method: 'post',
+      url: API_URL.LOGIN,
+      data: bodyFormData,
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
+    return res;
+  } catch (error) {
+    return {
+      data: null,
+      error: error,
+    };
+  }
 };
 
 type registerProps = {
@@ -27,19 +30,25 @@ type registerProps = {
   email: string;
   password: string;
 };
-export const authRegisterService = ({ username, email, password }: registerProps) => {
+export const authRegisterService = async ({
+  username,
+  email,
+  password,
+}: registerProps) => {
   const bodyFormData = formMaker({ username, email, password });
 
-  axios({
-    method: 'post',
-    url: API_URL.REGISTER,
-    data: bodyFormData,
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
+  try {
+    const res = await axios({
+      method: 'post',
+      url: API_URL.REGISTER,
+      data: bodyFormData,
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
+    return res;
+  } catch (error) {
+    return {
+      data: null,
+      error: error,
+    };
+  }
 };

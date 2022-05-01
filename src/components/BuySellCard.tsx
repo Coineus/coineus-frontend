@@ -1,4 +1,3 @@
-import { Button, Input } from '@nextui-org/react';
 import React, { useState } from 'react';
 import Select, { StylesConfig } from 'react-select';
 
@@ -34,7 +33,7 @@ const BuySellCard = () => {
   };
 
   return (
-    <div className="rounded-3xl bg-card">
+    <div className="rounded-3xl bg-card border">
       <div className="flex text-ghost">
         <div
           aria-hidden="true"
@@ -73,13 +72,13 @@ const BuySellCard = () => {
         </div>
         <div className="flex gap-x-4 mb-4">
           <div>
-            <Input borderWeight="light" bordered placeholder="Amount" color="primary" />
+            <input placeholder="Amount" />
           </div>
           <div>
-            <Input borderWeight="light" bordered placeholder="Amount" color="primary" />
+            <input placeholder="Amount" />
           </div>
         </div>
-        <Button css={{ width: '100%' }}>{isBuy ? 'Buy' : 'Sell'}</Button>
+        <button>{isBuy ? 'Buy' : 'Sell'}</button>
       </div>
     </div>
   );

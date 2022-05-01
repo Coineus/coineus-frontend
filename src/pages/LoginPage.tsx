@@ -1,4 +1,3 @@
-import { Button, Input, Spacer } from '@nextui-org/react';
 import AuthTemplate from 'components/templates/AuthTemplate';
 import { APP_URL } from 'constants/routes';
 import React, { useState } from 'react';
@@ -10,7 +9,9 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
 
   const loginClick = () => {
-    authLoginService({ email, password });
+    authLoginService({ email, password }).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
@@ -19,29 +20,26 @@ const LoginPage = () => {
         <h1 className="text-4xl font-bold mb-8">
           Login in <span className="text-primary">Coineus</span>
         </h1>
-        <div className="border-ghost rounded-xl bg-white w-96 p-6">
-          <Input
+        <div className="border-ghost rounded-xl bg-white w-96 pr-4 mb-6">
+          <label className="mb-1" htmlFor="mail">
+            Email
+          </label>
+          <input
+            id="mail"
+            className="mb-3"
             onChange={(e) => setEmail(e.target.value)}
-            fullWidth
-            label="Email"
             type="email"
           />
-          <Spacer y={1} />
-          <Input.Password
+          <label className="mb-1" htmlFor="mail">
+            Password
+          </label>
+          <input
+            className="mb-5"
             onChange={(e) => setPassword(e.target.value)}
-            fullWidth
-            label="Password"
+            type="password"
           />
-          {/* <div className="flex justify-end">
-            <Link className="font-semibold text-xs mt-2" to={APP_URL.FORGOT_PASSWORD}>
-              Forgot Password
-            </Link>
-          </div> */}
-          <Spacer y={1} />
           <div className="w-full flex">
-            <Button onClick={loginClick} css={{ width: '100%' }}>
-              Login
-            </Button>
+            <button onClick={loginClick}>Login</button>
           </div>
         </div>
         <div>

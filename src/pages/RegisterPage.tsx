@@ -1,26 +1,75 @@
-import { Button, Input, Spacer } from '@nextui-org/react';
 import AuthTemplate from 'components/templates/AuthTemplate';
 import { APP_URL } from 'constants/routes';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { authRegisterService } from 'services/auth';
 
-const LoginPage = () => {
+const RegisterPage = () => {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const registerClick = () => {
+    setError('');
+    if (username.length < 4) {
+      setError('Username must be at least 4 characters');
+      return;
+    }
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters');
+      return;
+    }
+
+    if (/\S+@\S+\.\S+/.test(email)) {
+      setError('Email must be in the correct format. For example : test@example.com');
+      return;
+    }
+
+    authRegisterService({ email, password, username }).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <AuthTemplate>
       <div className="mt-12">
         <h1 className="text-4xl font-bold mb-8">
           Register in <span className="text-primary">Coineus</span>
         </h1>
-        <div className="border rounded-xl shadow-md bg-white w-96 p-6">
-          <Input fullWidth label="Email" type="email" />
-          <Spacer y={1} />
-          <Input.Password fullWidth label="Password" />
-          <Spacer y={1} />
-          <Input.Password fullWidth label="Repeat Your Password" />
-          <Spacer y={1} />
+        <div className=" bg-white w-96 pr-4 mb-6">
+          <label className="mb-1" htmlFor="username">
+            Username
+          </label>
+          <input
+            minLength={4}
+            onChange={(e) => setUsername(e.target.value)}
+            id="username"
+            type="text"
+            className="mb-3"
+          />
+          <label className="mb-1" htmlFor="email">
+            Email
+          </label>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            className="mb-3"
+            id="email"
+            type="email"
+          />
+          <label className="mb-1" htmlFor="password">
+            Password
+          </label>
+          <input
+            minLength={8}
+            onChange={(e) => setPassword(e.target.value)}
+            className="mb-3"
+            id="password"
+          />
           <div className="w-full flex">
-            <Button css={{ width: '100%' }}>Register</Button>
+            <button onClick={registerClick}>Register</button>
           </div>
+          <p className="text-red-500 text-center my-2">{error}</p>
         </div>
         <div>
           <p className="font-semibold text-center">
@@ -32,4 +81,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
