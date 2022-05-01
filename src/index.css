@@ -24,7 +24,7 @@ code {
     background-color: #f4f4f4;
   }
   label {
-    @apply text-sm block
+    @apply text-sm block;
   }
   a {
     color: #5841d8;
