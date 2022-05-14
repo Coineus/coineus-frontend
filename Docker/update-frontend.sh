@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 echo "***** Pulling Latest API Image ******"
 docker image pull safderun/coineus-frontend:latest
 echo ""

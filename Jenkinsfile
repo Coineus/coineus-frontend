@@ -31,18 +31,18 @@ pipeline{
         SERVER_BUILD_NUMBER = "$BUILD_NUMBER"
       }
       steps{
-        sh "/coineus-frontend/Docker/update-frontend.sh"
+        sh "./Docker/update-frontend.sh"
       }
     }
   }
 
   post {
         success {
-          mail (bcc: '', body: "Latest deploy for Coineus Frontend was successfull!. \n Build Number: $BUILD_NUMBER", cc: 'mlheymen.ms@gmail.com', from: 'Jenkins', replyTo: '', subject: 'Coineus Frontend Deploy Succesfull!', to: 'safderun@proton.me')
+          mail (bcc: '', body: "Latest deploy for Coineus Frontend was successfull!. \n Build Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: 'Coineus Frontend Deploy Succesfull!', to: 'safderun@proton.me')
         }
         failure {
           mail bcc: '', body: '''Latest deploy for Coineus Frontend was failed!. 
-          Build Number: $BUILD_NUMBER''', cc: 'mlheymen.ms@gmail.com', from: 'Jenkins', replyTo: '', subject: '!!!Coineus Frontend Deploy Failed!!!', to: 'safderun@proton.me'
+          Build Number: $BUILD_NUMBER''', cc: '', from: 'Jenkins', replyTo: '', subject: '!!!Coineus Frontend Deploy Failed!!!', to: 'safderun@proton.me'
         }
     }
 
