@@ -8,7 +8,7 @@ START=$(date +%s)
 docker container rm -f coineus-frontend
 echo ""
 echo "***** Docker-Compose Up Runnig  *****"
-docker-compose -f ./update-frontend.yaml up -d
+docker-compose -f ./Docker/update-frontend.yaml up -d
 echo ""
 END=$(date +%s)
 DIFF=$(( $END - $START ))
