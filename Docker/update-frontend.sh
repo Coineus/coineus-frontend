@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "***** Pulling Latest API Image ******"
 docker image pull safderun/coineus-frontend:latest
 echo ""
