@@ -31,6 +31,7 @@ pipeline{
         SERVER_BUILD_NUMBER = "$BUILD_NUMBER"
       }
       steps{
+        sh "chmod +x -R ${env.WORKSPACE}"
         sh "./Docker/update-frontend.sh"
       }
     }
