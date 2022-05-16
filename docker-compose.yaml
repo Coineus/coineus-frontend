@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # coineus-api
+  coineus-api:
+    image: "safderun/coineus-frontend:latest"
+    container_name: coineus-frontend
+    networks:
+      - coineus_network
+    ports:
+      - 8080:80
+
+
+
+networks:
+    coineus_network:
+      external: true
+      
