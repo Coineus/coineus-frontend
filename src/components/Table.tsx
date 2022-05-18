@@ -1,8 +1,8 @@
 // import { LOCAL_KEYS } from 'constants/keys';
 // import { WS_BASE_URL } from 'constants/routes';
-import loading from '../../loading.svg';
-
 import React from 'react';
+
+import loading from '../../loading.svg';
 // import { operationArchive, operationDelete } from 'services/operationService';
 
 type TableProps = {
