@@ -1,6 +1,6 @@
 // import { LOCAL_KEYS } from 'constants/keys';
-import { WS_BASE_URL } from 'constants/routes';
-import React, { useEffect } from 'react';
+// import { WS_BASE_URL } from 'constants/routes';
+import React from 'react';
 // import { operationArchive, operationDelete } from 'services/operationService';
 
 type TableProps = {
@@ -9,21 +9,22 @@ type TableProps = {
 };
 
 const Table = ({ heads, rows }: TableProps) => {
-  useEffect(() => {
-    const ws = new WebSocket(WS_BASE_URL);
-    ws.onopen = (event) => {
-      console.log(event);
-      ws.send('');
-    };
-    ws.onmessage = function (event) {
-      const json = JSON.parse(event.data);
-      try {
-        console.log(json);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   const ws = new WebSocket(WS_BASE_URL);
+  //   ws.onopen = (event) => {
+  //     console.log(event);
+  //     ws.send('');
+  //   };
+  //   ws.onmessage = function (event) {
+  //     const json = JSON.parse(event.data);
+  //     try {
+  //       console.log(json);
+  //       setWsCoins(json);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  // }, []);
 
   // const remove = (coinsymbol: string) => {
   //   operationDelete({
