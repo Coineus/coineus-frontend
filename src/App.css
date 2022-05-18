@@ -13,8 +13,7 @@
   transition: opacity 400ms 0ms, -webkit-transform 0ms 400ms;
   -o-transition: transform 0ms 400ms, opacity 400ms 0ms;
   transition: transform 0ms 400ms, opacity 400ms 0ms;
-  transition: transform 0ms 400ms, opacity 400ms 0ms,
-    -webkit-transform 0ms 400ms;
+  transition: transform 0ms 400ms, opacity 400ms 0ms, -webkit-transform 0ms 400ms;
   -webkit-transform: scale(0);
   -ms-transform: scale(0);
   transform: scale(0);
