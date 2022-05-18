@@ -1,8 +1,9 @@
 const formMaker = (data: Object) => {
   const formData = new FormData();
 
-  for (const [key, value] of Object.entries(data)) {
-    formData.append(key, value.trim());
+  for (let [key, value] of Object.entries(data)) {
+    value = typeof value === 'string' ? value.trim() : value;
+    formData.append(key, value);
   }
   return formData;
 };

@@ -1,0 +1,122 @@
+[
+    {
+        "symbol": "BTC",
+        "name": "Bitcoin"
+    },
+    {
+        "symbol": "ETH",
+        "name": "Ethereum"
+    },
+    {
+        "symbol": "USDT",
+        "name": "Tether"
+    },
+    {
+        "symbol": "USDC",
+        "name": "USD Coin"
+    },
+    {
+        "symbol": "BNB",
+        "name": "BNB"
+    },
+    {
+        "symbol": "XRP",
+        "name": "XRP"
+    },
+    {
+        "symbol": "ADA",
+        "name": "Cardano"
+    },
+    {
+        "symbol": "SOL",
+        "name": "Solana"
+    },
+    {
+        "symbol": "BUSD",
+        "name": "Binance USD"
+    },
+    {
+        "symbol": "DOT",
+        "name": "Polkadot"
+    },
+    {
+        "symbol": "DOGE",
+        "name": "Dogecoin"
+    },
+    {
+        "symbol": "AVAX",
+        "name": "Avalanche"
+    },
+    {
+        "symbol": "WBTC",
+        "name": "Wrapped Bitcoin"
+    },
+    {
+        "symbol": "STETH",
+        "name": "Lido Staked Ether"
+    },
+    {
+        "symbol": "TRX",
+        "name": "Tron"
+    },
+    {
+        "symbol": "SHIB",
+        "name": "Shiba Inu"
+    },
+    {
+        "symbol": "DAI",
+        "name": "Dai"
+    },
+    {
+        "symbol": "LTC",
+        "name": "Litecoin"
+    },
+    {
+        "symbol": "CRO",
+        "name": "Cranos"
+    },
+    {
+        "symbol": "MATIC",
+        "name": "Polygon"
+    },
+    {
+        "symbol": "LEO",
+        "name": "LEO Token"
+    },
+    {
+        "symbol": "NEAR",
+        "name": "NEAR Protocol"
+    },
+    {
+        "symbol": "FTT",
+        "name": "FTX Token"
+    },
+    {
+        "symbol": "BHC",
+        "name": "Bitcoin Cash"
+    },
+    {
+        "symbol": "LINK",
+        "name": "Chainlink"
+    },
+    {
+        "symbol": "XLM",
+        "name": "Stellar"
+    },
+    {
+        "symbol": "ALGO",
+        "name": "Algorand"
+    },
+    {
+        "symbol": "OKB",
+        "name": "OKB"
+    },
+    {
+        "symbol": "ATOM",
+        "name": "Cosmos Hub"
+    },
+    {
+        "symbol": "XMR",
+        "name": "Monero"
+    }
+]

@@ -1,16 +1,26 @@
 import AuthTemplate from 'components/templates/AuthTemplate';
+import { LOCAL_KEYS } from 'constants/keys';
 import { APP_URL } from 'constants/routes';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authLoginService } from 'services/auth';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const loginClick = () => {
+    setError('');
     authLoginService({ email, password }).then((res) => {
-      console.log(res);
+      if (res.data) {
+        localStorage.setItem(LOCAL_KEYS.TOKEN, res.data.token);
+        navigate(APP_URL.HOME);
+      } else {
+        setError(res.error);
+      }
     });
   };
 
@@ -41,6 +51,7 @@ const LoginPage = () => {
           <div className="w-full flex">
             <button onClick={loginClick}>Login</button>
           </div>
+          <p className="text-red-500 text-center my-2">{error}</p>
         </div>
         <div>
           <p className="font-semibold text-center">

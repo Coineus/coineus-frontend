@@ -1,7 +1,7 @@
 import { APP_URL } from 'constants/routes';
 import React from 'react';
-import { Category } from 'react-iconly';
-import { NavLink } from 'react-router-dom';
+import { Category, Wallet } from 'react-iconly';
+import { NavLink, useLocation } from 'react-router-dom';
 
 type NavItemProps = {
   children: React.ReactNode;
@@ -23,11 +23,18 @@ const NavItem = ({ link, children, active }: NavItemProps) => {
 };
 
 const DashboardSidebar = () => {
+  const location = useLocation();
+
   const NAVS = [
     {
       link: APP_URL.HOME,
       icon: <Category set="bold" />,
       title: 'Dashboard',
+    },
+    {
+      link: APP_URL.WALLET,
+      icon: <Wallet set="bold" />,
+      title: 'Wallet',
     },
   ];
 
@@ -41,8 +48,8 @@ const DashboardSidebar = () => {
             </NavLink>
           </li>
           {NAVS.map((nav) => (
-            <li key={nav.title}>
-              <NavItem active={true} link={nav.link}>
+            <li className="mb-2" key={nav.title}>
+              <NavItem active={location.pathname === nav.link} link={nav.link}>
                 {nav.icon}
                 <span className="ml-2">{nav.title}</span>
               </NavItem>

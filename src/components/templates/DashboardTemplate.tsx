@@ -1,5 +1,8 @@
 import DashboardSidebar from 'components/DashboardSidebar';
-import React from 'react';
+import { LOCAL_KEYS } from 'constants/keys';
+import { APP_URL } from 'constants/routes';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardTemplate = ({
   children,
@@ -8,6 +11,14 @@ const DashboardTemplate = ({
   children: React.ReactNode;
   title: string;
 }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem(LOCAL_KEYS.TOKEN)) {
+      navigate(APP_URL.LOGIN);
+    }
+  }, []);
+
   return (
     <div className="flex">
       <DashboardSidebar />

@@ -16,7 +16,7 @@ export const authLoginService = async ({ email, password }: loginProps) => {
       data: bodyFormData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
-    return res;
+    return res.data;
   } catch (error) {
     return {
       data: null,
@@ -44,7 +44,7 @@ export const authRegisterService = async ({
       data: bodyFormData,
       headers: { 'Content-Type': 'multipart/form-data' },
     });
-    return res;
+    return res.data;
   } catch (error) {
     return {
       data: null,

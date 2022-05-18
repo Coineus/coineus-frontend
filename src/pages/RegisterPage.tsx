@@ -1,10 +1,13 @@
 import AuthTemplate from 'components/templates/AuthTemplate';
+import { LOCAL_KEYS } from 'constants/keys';
 import { APP_URL } from 'constants/routes';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authRegisterService } from 'services/auth';
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,13 +24,18 @@ const RegisterPage = () => {
       return;
     }
 
-    if (/\S+@\S+\.\S+/.test(email)) {
-      setError('Email must be in the correct format. For example : test@example.com');
-      return;
-    }
+    // if (/\S+@\S+\.\S+/.test(email)) {
+    //   setError('Email must be in the correct format. For example : test@example.com');
+    //   return;
+    // }
 
     authRegisterService({ email, password, username }).then((res) => {
-      console.log(res);
+      if (res.data) {
+        localStorage.setItem(LOCAL_KEYS.TOKEN, res.data.token);
+        navigate(APP_URL.HOME);
+      } else {
+        setError(res.error);
+      }
     });
   };
 
