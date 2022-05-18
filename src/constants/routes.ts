@@ -1,6 +1,12 @@
-const API_BASE_URL = 'http://3.72.108.27:80/';
-const SERVICE_BASE_URL = 'http://3.72.108.27:36000/';
-export const WS_BASE_URL = 'ws://3.72.108.27:36000';
+const API_BASE_URL = import.meta.env.API_BASE_URL
+  ? import.meta.env.API_BASE_URL
+  : 'http://3.72.108.27:80/';
+const SERVICE_BASE_URL = import.meta.env.SERVICE_BASE_URL
+  ? import.meta.env.SERVICE_BASE_URL
+  : 'http://3.72.108.27:36000/';
+export const WS_BASE_URL = import.meta.env.WS_BASE_URL
+  ? import.meta.env.WS_BASE_URL
+  : 'ws://3.72.108.27:36000';
 
 export const APP_URL = {
   HOME: '/',
