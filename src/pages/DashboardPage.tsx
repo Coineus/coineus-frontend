@@ -14,7 +14,7 @@ const DashboardPage = () => {
   const [wsCoins, setWsCoins] = useState<any>({});
 
   const tableData = {
-    heads: ['Sembol', 'Alış Fiyatı', 'Miktar', 'Anlık', 'Kar/Zarar'],
+    heads: ['Sembol', 'Alış Fiyatı', 'Miktar', 'Anlık', ''],
   };
 
   useEffect(() => {

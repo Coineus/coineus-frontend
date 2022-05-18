@@ -1,5 +1,7 @@
 // import { LOCAL_KEYS } from 'constants/keys';
 // import { WS_BASE_URL } from 'constants/routes';
+import loading from '../../loading.svg';
+
 import React from 'react';
 // import { operationArchive, operationDelete } from 'services/operationService';
 
@@ -60,7 +62,7 @@ const Table = ({ heads, rows }: TableProps) => {
           <tr key={'row-' + i}>
             {row.map((item, j) => (
               <td className="font-semibold px-4 py-3 text-sm" key={'item-' + j}>
-                {item}
+                {item === undefined ? <img src={loading} alt="loading" /> : item}
               </td>
             ))}
             <td className="font-semibold px-4 py-3 text-sm transition ease-in-out delay-150 cursor-pointer hover:text-green-400">
