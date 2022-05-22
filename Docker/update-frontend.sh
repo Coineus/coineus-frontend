@@ -13,4 +13,3 @@ echo ""
 END=$(date +%s)
 DIFF=$(( $END - $START ))
 echo "Website Updated Succesfully, Interruption for $DIFF Seconds"
-

@@ -1,12 +1,12 @@
-const API_BASE_URL = import.meta.env.API_BASE_URL
-  ? import.meta.env.API_BASE_URL.toString()
-  : 'http://3.72.108.27:80/';
-const SERVICE_BASE_URL = import.meta.env.SERVICE_BASE_URL
-  ? import.meta.env.SERVICE_BASE_URL.toString()
-  : 'http://3.72.108.27:36000/';
-export const WS_BASE_URL = import.meta.env.WS_BASE_URL
-  ? import.meta.env.WS_BASE_URL.toString()
-  : 'ws://3.72.108.27:36000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+  ? import.meta.env.VITE_API_BASE_URL.toString()
+  : 'http://3.72.108.27:8080/';
+const SERVICE_BASE_URL = import.meta.env.VITE_SERVICE_BASE
+  ? import.meta.env.VITE_SERVICE_BASE.toString()
+  : 'http://3.72.108.27:3000/';
+export const WS_BASE_URL = import.meta.env.VITE_WS_BASE_URL
+  ? import.meta.env.VITE_WS_BASE_URL.toString()
+  : 'ws://3.72.108.27:3000/';
 
 export const APP_URL = {
   HOME: '/',

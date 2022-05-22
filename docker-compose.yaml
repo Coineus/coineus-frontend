@@ -7,10 +7,6 @@ services:
       - coineus_network
     ports:
       - 80:80
-    #import env file
-    env_file:
-      - ./env/production.env
-
 networks:
     coineus_network:
-      external: true
+      driver: bridge

@@ -6,7 +6,7 @@ const VersionPage = () => {
       <div className="font-bold text-3xl text-white">
         <p>Version 1</p>
         <p>Kubernetes Test</p>
-        <p>Pod Name: {import.meta.env.HOSTNAME}</p>
+        <p>Pod Name: {import.meta.env.VITE_HOSTNAME}</p>
       </div>
     </div>
   );
