@@ -13,16 +13,20 @@ pipeline{
     stage('docker image build'){
       steps{
         echo "Building docker image"
-        dockerImage = docker.build IMAGE_NAME
+        script{
+          dockerImage = docker.build IMAGE_NAME
+        }
       }
     }
 
     stage('docker image push'){
       steps{
         echo "Pushing docker image"
-        docker.withRegistry( '', registryCredential ) {
-          dockerImage.push("$BUILD_NUMBER")
-          dockerImage.push('latest')
+        script{
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+            dockerImage.push('latest')
+          }
         }
         echo "Removing docker image"
         sh "docker rmi $IMAGE_NAME:$BUILD_NUMBER"
