@@ -39,7 +39,7 @@ pipeline{
         SERVER_BUILD_NUMBER = "$BUILD_NUMBER"
       }
       steps{
-        sh "./Docker/update-frontend.sh"
+        sh "sudo sh ./Docker/update-frontend.sh"
       }
     }
   }
