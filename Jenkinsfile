@@ -35,6 +35,7 @@ pipeline{
     }
 
     stage('deploy'){
+      agent {label 'ec2'}
       environment {
         SERVER_BUILD_NUMBER = "$BUILD_NUMBER"
       }
