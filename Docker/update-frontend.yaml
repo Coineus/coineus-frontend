@@ -1,9 +1,8 @@
 version: '3.8'
 
 services:
-  # coineus-api
-  coineus-web:
-    image: "safderun/coineus-frontend:latest"
+  coineus-frontend-jenkins:
+    image: "safderun/coineus-frontend:${TAG}"
     container_name: coineus-frontend
     networks:
       - coineus_network
