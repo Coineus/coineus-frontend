@@ -1,7 +1,7 @@
 def agentLabel
 if (env.BRANCH_NAME == "main") {
     environment = "production"
-    agentLabel = "master"
+    agentLabel = "main"
     TAG = "prod"
 } else if(env.BRANCH_NAME == "dev"){
     environment = "development"
