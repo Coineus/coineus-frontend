@@ -1,3 +1,18 @@
+def agentLabel
+if (env.BRANCH_NAME == "master") {
+    environment = "production"
+    agentLabel = "master"
+    TAG = "prod"
+} else if(env.BRANCH_NAME == "dev"){
+    environment = "development"
+    agentLabel = "ec2"
+    TAG = "dev"
+} else{
+    environment = "development"
+    agentLabel = "ec2"
+    TAG = "dev"
+}
+
 pipeline{
 
   agent any
@@ -9,10 +24,11 @@ pipeline{
   }
 
   stages{
-
     stage('docker image build'){
+      agent {label 'master'}
       steps{
-        echo "Building docker image"
+        echo "Building docker image."
+        sh "cp -r ./config/$environment-env ./.env"
         script{
           dockerImage = docker.build IMAGE_NAME
         }
@@ -20,38 +36,52 @@ pipeline{
     }
 
     stage('docker image push'){
+      agent {label 'master'}
       steps{
-        echo "Pushing docker image"
         script{
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$BUILD_NUMBER")
-            dockerImage.push('latest')
+          echo "This is ${env.BRANCH_NAME} environment\nPushing docker image to dockerhub."
+          docker.withRegistry('', registryCredential) {
+            dockerImage.push("${TAG}-${BUILD_NUMBER}")
+            env.BRANCH_NAME=='master' ? dockerImage.push("latest"): ''
           }
+          echo "Removing docker image"
+          sh "docker rmi $IMAGE_NAME:$TAG-$BUILD_NUMBER"
+          env.BRANCH_NAME=='master' ? "sh docker rmi $IMAGE_NAME:latest" : ''
         }
-        echo "Removing docker image"
-        sh "docker rmi $IMAGE_NAME:$BUILD_NUMBER"
-        sh "docker rmi $IMAGE_NAME:latest"
       }
     }
 
     stage('deploy'){
-      agent {label 'ec2'}
+      agent {label agentLabel}
       environment {
-        SERVER_BUILD_NUMBER = "$BUILD_NUMBER"
+        TAG = "$TAG-$BUILD_NUMBER"
       }
       steps{
-        sh "chmod +x -R ${env.WORKSPACE}"
-        sh "./Docker/update-frontend.sh"
+        script{
+          if(env.BRANCH_NAME=='master'){
+            echo 'This is master branch, deploying to production'
+            sh "chmod +x -R ${env.WORKSPACE}"
+            sh "./Docker/update-frontend.sh latest"
+          } else if (env.BRANCH_NAME=='dev'){
+            echo 'This is dev branch, deploying to dev'
+            sh "chmod +x -R ${env.WORKSPACE}"
+            sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
+          } else {
+            echo 'This is not master or dev branch, deploying to ec2'
+            sh "chmod +x -R ${env.WORKSPACE}"
+            sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
+          }
+        }
       }
     }
   }
 
   post {
         success {
-          mail (bcc: '', body: "Latest deploy for Coineus Frontend was successfull!.\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: 'Coineus Frontend Deploy Succesfull!', to: 'safderun@proton.me')
+          mail (bcc: '', body: "Latest deploy for Coineus Frontend was successfull!.\nEnvironment: $environment\nTag: $TAG\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: "Coineus Frontend Deploy $environment Succesfull!", to: "safderun@proton.me")
         }
         failure {
-          mail bcc: '', body: "Latest deploy for Coineus Frontend was failed!.\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: '!!!Coineus Frontend Deploy Failed!!!', to: 'safderun@proton.me'
+          mail bcc: '', body: "Latest deploy for Coineus Frontend was failed!.\nEnvironment: $environment\nTag: $TAG\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: "!!!Coineus Frontend Deploy $environment Failed!!!", to: "safderun@proton.me"
         }
     }
 

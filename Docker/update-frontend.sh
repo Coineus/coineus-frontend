@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-echo "***** Pulling Latest API Image ******"
-docker image pull safderun/coineus-frontend:latest
+echo "***** Pulling $1 Tagged Image ******"
+docker image pull "safderun/coineus-frontend:$1"
 echo ""
 echo "***** Removing Old Container *****"
 START=$(date +%s)
