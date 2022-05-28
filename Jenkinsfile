@@ -1,7 +1,7 @@
 def agentLabel
-if (env.BRANCH_NAME == "master") {
+if (env.BRANCH_NAME == "main") {
     environment = "production"
-    agentLabel = "master"
+    agentLabel = "main"
     TAG = "prod"
 } else if(env.BRANCH_NAME == "dev"){
     environment = "development"
@@ -42,15 +42,14 @@ pipeline{
           echo "This is ${env.BRANCH_NAME} environment\nPushing docker image to dockerhub."
           docker.withRegistry('', registryCredential) {
             dockerImage.push("${TAG}-${BUILD_NUMBER}")
-            env.BRANCH_NAME=='master' ? dockerImage.push("latest"): ''
+            env.BRANCH_NAME=='main' ? dockerImage.push("latest"): ''
           }
           echo "Removing docker image"
           sh "docker rmi $IMAGE_NAME:$TAG-$BUILD_NUMBER"
-          env.BRANCH_NAME=='master' ? "sh docker rmi $IMAGE_NAME:latest" : ''
+          env.BRANCH_NAME=='main' ? "sh docker rmi $IMAGE_NAME:latest" : ''
         }
       }
     }
-
     stage('deploy'){
       agent {label agentLabel}
       environment {
@@ -58,8 +57,8 @@ pipeline{
       }
       steps{
         script{
-          if(env.BRANCH_NAME=='master'){
-            echo 'This is master branch, deploying to production'
+          if(env.BRANCH_NAME=='main'){
+            echo 'This is main branch, deploying to production'
             sh "chmod +x -R ${env.WORKSPACE}"
             sh "./Docker/update-frontend.sh latest"
           } else if (env.BRANCH_NAME=='dev'){
@@ -67,7 +66,7 @@ pipeline{
             sh "chmod +x -R ${env.WORKSPACE}"
             sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
           } else {
-            echo 'This is not master or dev branch, deploying to ec2'
+            echo 'This is not main or dev branch, deploying to ec2'
             sh "chmod +x -R ${env.WORKSPACE}"
             sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
           }
