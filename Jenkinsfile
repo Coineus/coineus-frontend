@@ -78,10 +78,6 @@ pipeline{
   post {
         success {
           mail (bcc: '', body: "Latest deploy for Coineus Frontend was successfull!.\nEnvironment: $environment\nTag: $TAG\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: "Coineus Frontend Deploy $environment Succesfull!", to: "safderun@proton.me")
-          script{
-            def date = sh(returnStdout: true, script: "date -u").trim()
-            pullRequest.comment("Build ${env.BUILD_ID} ran at ${date}")
-          }
         }
         failure {
           mail bcc: '', body: "Latest deploy for Coineus Frontend was failed!.\nEnvironment: $environment\nTag: $TAG\nBuild Number: $BUILD_NUMBER", cc: '', from: 'Jenkins', replyTo: '', subject: "!!!Coineus Frontend Deploy $environment Failed!!!", to: "safderun@proton.me"
