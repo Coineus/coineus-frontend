@@ -64,7 +64,7 @@ pipeline{
             sh "./Docker/update-frontend.sh latest"
           } else if (env.BRANCH_NAME=='dev'){
             echo 'This is dev branch, deploying to dev'
-            sh "sudo systemctl start coineus-frontend.service"            
+            sh "sudo systemctl restart coineus-frontend.service"            
           } else {
             echo 'This is not main or dev branch, deploying to ec2'
             sh "chmod +x -R ${env.WORKSPACE}"
