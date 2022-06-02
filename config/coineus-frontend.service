@@ -1,0 +1,20 @@
+# Coineus Frontend Dev Systemd Unit File
+[Unit]
+Description=coineus frontend container
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStartPre=/usr/bin/docker pull safderun/coineus-frontend:latest
+ExecStart=/usr/bin/docker run \
+	--name coineus-frontend \
+	-p 80:80 \
+	--network coineus_network \
+	safderun/coineus-frontend:dev-latest
+ExecStop=/usr/bin/docker stop coineus-frontend
+ExecStop=-/usr/bin/docker rm coineus-frontend
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target
