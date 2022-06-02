@@ -43,6 +43,7 @@ pipeline{
           docker.withRegistry('', registryCredential) {
             dockerImage.push("${TAG}-${BUILD_NUMBER}")
             env.BRANCH_NAME=='main' ? dockerImage.push("latest"): ''
+            env.BRANCH_NAME=='dev' ? dockerImage.push("dev-latest"): ''
           }
           echo "Removing docker image"
           sh "docker rmi $IMAGE_NAME:$TAG-$BUILD_NUMBER"
