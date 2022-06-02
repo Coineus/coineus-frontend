@@ -10,7 +10,7 @@ ExecStart=/usr/bin/docker run \
 	--name coineus-frontend \
 	-p 80:80 \
 	--network coineus_network \
-	safderun/coineus-frontend:dev-latest
+	safderun/coineus-frontend:latest
 ExecStop=/usr/bin/docker stop coineus-frontend
 ExecStop=-/usr/bin/docker rm coineus-frontend
 Restart=always
