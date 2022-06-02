@@ -43,6 +43,7 @@ pipeline{
           docker.withRegistry('', registryCredential) {
             dockerImage.push("${TAG}-${BUILD_NUMBER}")
             env.BRANCH_NAME=='main' ? dockerImage.push("latest"): ''
+            env.BRANCH_NAME=='dev' ? dockerImage.push("dev-latest"): ''
           }
           echo "Removing docker image"
           sh "docker rmi $IMAGE_NAME:$TAG-$BUILD_NUMBER"
@@ -59,16 +60,13 @@ pipeline{
         script{
           if(env.BRANCH_NAME=='main'){
             echo 'This is main branch, deploying to production'
-            sh "chmod +x -R ${env.WORKSPACE}"
-            sh "./Docker/update-frontend.sh latest"
+            sh "sudo systemctl restart coineus-frontend.service"   
           } else if (env.BRANCH_NAME=='dev'){
             echo 'This is dev branch, deploying to dev'
-            sh "chmod +x -R ${env.WORKSPACE}"
-            sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
+            sh "sudo systemctl restart coineus-frontend.service"            
           } else {
             echo 'This is not main or dev branch, deploying to ec2'
-            sh "chmod +x -R ${env.WORKSPACE}"
-            sh "./Docker/update-frontend.sh dev-$BUILD_NUMBER"
+            sh "sudo systemctl restart coineus-frontend.service"
           }
         }
       }
