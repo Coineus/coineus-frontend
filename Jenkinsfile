@@ -60,10 +60,8 @@ pipeline{
         script{
           if(env.BRANCH_NAME=='main'){
             echo 'This is main branch, deploying to production'
-            sh "sudo systemctl restart coineus-frontend.service"   
           } else if (env.BRANCH_NAME=='dev'){
             echo 'This is dev branch, deploying to dev'
-            sh "sudo systemctl restart coineus-frontend.service"            
           } else {
             echo 'This is not main or dev branch, deploying to ec2'
           }
