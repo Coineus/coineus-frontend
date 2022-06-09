@@ -66,8 +66,8 @@ pipeline{
             sh "sudo systemctl restart coineus-frontend.service"            
           } else {
             echo 'This is not main or dev branch, deploying to ec2'
-            sh "sudo systemctl restart coineus-frontend.service"
           }
+          sh "sudo systemctl restart coineus-frontend.service"
         }
       }
     }
