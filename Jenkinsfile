@@ -60,10 +60,7 @@ pipeline{
         script{
           if(env.BRANCH_NAME=='main'){
             echo 'This is main branch, deploying to production'
-            sh '/usr/bin/docker stop coineus-frontend'
-            sh '/usr/bin/docker rm coineus-frontend'
-            sh '/usr/bin/docker pull safderun/coineus-frontend:latest'
-            sh '/usr/bin/docker run --name coineus-frontend -p 80:80 --network coineus_network safderun/coineus-frontend:latest'
+            sh 'sudo systemctl restart coineus-frontend.service'
           } else if (env.BRANCH_NAME=='dev'){
             echo 'This is dev branch, deploying to dev'
             sh 'sudo systemctl restart coineus-frontend.service'
